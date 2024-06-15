@@ -27,7 +27,7 @@ class Cart(Base):
 
 
 class Order(Base):
-    __tablename__ = "cart"
+    __tablename__ = "order"
     id: int = Column(Integer, primary_key=True, index=True)
     user: User = ForeignKey("user.id", index=True)
     status: OrderStatus = Column(SQLAlchemyEnum(OrderStatus), nullable=False)

@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 
 
 from models.db import get_db
-from models.dtos import ArticleResponse, ArticleCreate, ArticleUpdate, ArticleDelete
+from models.dtos.article_dtos import ArticleResponse, ArticleCreate, ArticleUpdate, ArticleDelete
 from models.models import Article
 
 router = APIRouter(

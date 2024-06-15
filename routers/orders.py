@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from models.db import get_db
-from models.dtos import OrderResponse, OrderCreate, OrderUpdate, OrderDelete, OrderStatus
+from models.dtos.order_dtos import OrderResponse, OrderCreate, OrderUpdate, OrderDelete, OrderStatus
 from models.models import Order
 
 router = APIRouter(

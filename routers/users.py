@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from models.db import get_db
-from models.dtos import UserResponse, UserCreate, UserUpdate, UserDelete
+from models.dtos.user_dtos import UserResponse, UserCreate, UserUpdate, UserDelete
 from models.models import User
 
 router = APIRouter(
@@ -43,7 +43,7 @@ def update_user(user: UserUpdate, db: Session = Depends(get_db)):
 
 
 @router.delete("/", response_model=None)
-async def delete_item(user: UserDelete, db: Session = Depends(get_db)) -> None:
+async def delete_user(user: UserDelete, db: Session = Depends(get_db)) -> None:
     db_item: User = db.query(User).filter(User.id == user.id).first()
     db.delete(db_item)
     db.commit()
