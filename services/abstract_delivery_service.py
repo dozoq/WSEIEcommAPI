@@ -1,16 +1,10 @@
 from abc import ABC, abstractmethod
 
+from models.dtos.order_dtos import OrderPointer
+
 
 class DeliveryServiceProvider(ABC):
 
     @abstractmethod
-    def create_shipment(self, order: dict) -> dict:
-        pass
-
-    @abstractmethod
-    def track_shipment(self, tracking_id: str) -> dict:
-        pass
-
-    @abstractmethod
-    def cancel_shipment(self, tracking_id: str) -> dict:
+    def generate_shipment_number(self, order: OrderPointer) -> dict:
         pass

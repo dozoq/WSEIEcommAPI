@@ -12,6 +12,17 @@ class OrderBase(BaseModel):
         from_attributes = True
 
 
+class OrderPointer(OrderBase):
+    id: int
+
+
+class OrderFullData(OrderBase):
+    id: int
+    user: UserResponse
+    status: OrderStatus
+    tracking_number: str | None = None
+
+
 class OrderResponse(OrderBase):
     id: int
     user: UserResponse

@@ -1,5 +1,6 @@
 .env
 test.db
+.editorconfig
 __pycache__/
 models/__pycache__/
 models/dtos/__pycache__/

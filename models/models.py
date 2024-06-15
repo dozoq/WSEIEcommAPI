@@ -18,6 +18,7 @@ class Order(Base):
     status: OrderStatus = Column(SQLAlchemyEnum(OrderStatus), nullable=False)
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship("User", back_populates="orders")
+    tracking_number = Column(String, nullable=True)
 
 
 class User(Base):
