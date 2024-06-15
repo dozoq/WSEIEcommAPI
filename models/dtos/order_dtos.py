@@ -3,36 +3,32 @@ from enum import Enum
 
 from pydantic import BaseModel
 
-from models.models import User
+from models.dtos.user_dtos import User
+from models.enums import OrderStatus
 
 
-class OrderStatus(str, Enum):
-    ORDER_INIT = "Order Initialized"
-    ORDER_PAID = "Order Paid"
-    ORDER_ARTICLES_CONFIRMED = "Order articles confirmed"
-    ORDER_ARTICLES_DENIED = "Order articles denied"
-    ORDER_BEING_PACKED = "Order being packed"
-    ORDER_SENT = "Order sent"
-    ORDER_DELIVERED = "Order delivered"
-    ORDER_CANCELED = "Order canceled"
+class OrderBase(BaseModel):
+    class Config:
+        from_attributes = True
 
 
-class OrderResponse(BaseModel):
+
+
+class OrderResponse(OrderBase):
     id: int
     user: User
     status: OrderStatus
 
 
-class OrderDelete(BaseModel):
+class OrderDelete(OrderBase):
     id: int
 
 
-class OrderUpdate(BaseModel):
+class OrderUpdate(OrderBase):
     id: int
     user: User | None = None
     status: OrderStatus | None = None
 
 
-class OrderCreate(BaseModel):
-    id: int
+class OrderCreate(OrderBase):
     user: User

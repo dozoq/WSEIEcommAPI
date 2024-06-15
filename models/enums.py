@@ -1,8 +1,8 @@
 from enum import Enum
 
 
-class OrderStatus(Enum):
-    ORDER_INIT = "Order Initialized"
+class OrderStatus(str, Enum):
+    ORDER_INIT = "ORDER_INIT"
     ORDER_PAID = "Order Paid"
     ORDER_ARTICLES_CONFIRMED = "Order articles confirmed"
     ORDER_ARTICLES_DENIED = "Order articles denied"
