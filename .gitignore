@@ -1,1 +1,6 @@
 .env
+test.db
+__pycache__/
+models/__pycache__/
+models/dtos/__pycache__/
+routers/__pycache__/
