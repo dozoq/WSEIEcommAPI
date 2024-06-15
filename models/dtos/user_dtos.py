@@ -2,7 +2,12 @@
 from pydantic import BaseModel
 
 
-class User(BaseModel):
+class UserBase(BaseModel):
+    class Config:
+        from_attributes = True
+
+
+class User(UserBase):
     id: int
     first_name: str
     last_name: str
@@ -10,14 +15,14 @@ class User(BaseModel):
     password: str
 
 
-class UserCreate(BaseModel):
+class UserCreate(UserBase):
     first_name: str
     last_name: str
     username: str
     password: str
 
 
-class UserUpdate(BaseModel):
+class UserUpdate(UserBase):
     id: int
     first_name: str | None = None
     last_name: str | None = None
@@ -25,11 +30,11 @@ class UserUpdate(BaseModel):
     password: str | None = None
 
 
-class UserDelete(BaseModel):
+class UserDelete(UserBase):
     id: int
 
 
-class UserResponse(BaseModel):
+class UserResponse(UserBase):
     id: int
     first_name: str
     last_name: str

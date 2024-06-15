@@ -5,7 +5,8 @@ from sqlalchemy.orm import Session, joinedload
 
 from models.db import get_db
 from models.dtos.order_dtos import OrderResponse, OrderCreate, OrderUpdate, OrderDelete, OrderStatus
-from models.models import Order
+from models.dtos.user_dtos import UserResponse
+from models.models import Order, User
 
 router = APIRouter(
     prefix="/orders",
@@ -16,8 +17,15 @@ router = APIRouter(
 @router.get("/")
 def read_orders(db: Session = Depends(get_db)) -> List[OrderResponse]:
     list_of_orders_to_convert = db.query(Order).options(joinedload(Order.user)).all()
-    converted_list = [OrderResponse.from_orm(item) for item in list_of_orders_to_convert]
-    return converted_list
+    converted_list = [
+        OrderResponse(
+            id=order.id,
+            user=UserResponse.from_orm(order.user),
+            status=order.status
+        )
+        for order in list_of_orders_to_convert
+    ]
+    return list_of_orders_to_convert
 
 
 @router.get("/{username}", response_model=OrderResponse)
@@ -29,9 +37,11 @@ def read_order_by_username(username: str, db: Session = Depends(get_db)) -> Orde
 
 
 @router.post("/", response_model=OrderResponse)
-def create_order(user: OrderCreate, db: Session = Depends(get_db)) -> OrderResponse:
-    db_item: Order = Order(**user.model_dump())
-    db_item.status = OrderStatus.ORDER_INIT
+def create_order(order: OrderCreate, db: Session = Depends(get_db)) -> OrderResponse:
+    db_user = db.query(User).filter(User.id == order.user_id).first()
+    if not db_user:
+        raise HTTPException(status_code=400, detail="User not found")
+    db_item = Order(user_id=order.user_id, status=OrderStatus.ORDER_INIT)
     db.add(db_item)
     db.commit()
     db.refresh(db_item)
