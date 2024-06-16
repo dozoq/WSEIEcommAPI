@@ -3,7 +3,7 @@ from enum import Enum
 
 from pydantic import BaseModel
 
-from models.dtos.user_dtos import UserResponse
+from models.dtos.user_dtos import UserResponse, UserUpdate
 from models.enums import OrderStatus
 
 
@@ -35,7 +35,7 @@ class OrderDelete(OrderBase):
 
 class OrderUpdate(OrderBase):
     id: int
-    user: UserResponse | None = None
+    user: UserUpdate | None = None
     status: OrderStatus | None = None
 
 

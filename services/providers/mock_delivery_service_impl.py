@@ -19,3 +19,9 @@ class MockDeliveryServiceProvider(DeliveryServiceProvider, ABC):
             tracking_number=''.join(random.choices(string.ascii_uppercase + string.digits, k=8)),
             delivery_provider=self.get_provider_name())
         return response
+
+    def ask_for_shipment(self, order: OrderPointer) -> None:
+        return
+
+    def unpack_shipment_status(self, order: OrderPointer, shipment_response) -> None:
+        return

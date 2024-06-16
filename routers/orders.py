@@ -52,12 +52,12 @@ def create_order(order: OrderCreate, db: Session = Depends(get_db)) -> OrderResp
 def update_order(order: OrderUpdate, db: Session = Depends(get_db)) -> OrderResponse:
     db_item: Order | None = db.query(Order).filter(Order.id == order.id).first()
     if db_item is None:
-        return HTTPException(404)
-    db_item.status = order.user if order.user is not None else db_item.user
+        raise HTTPException(404)
+    db_item.user = order.user if order.user is not None else db_item.user
     db_item.status = order.status if order.status is not None else db_item.status
     db.commit()
     db.refresh(db_item)
-    return db_item
+    return OrderResponse.from_orm(db_item)
 
 
 @router.delete("/cancel", response_model=OrderResponse)
