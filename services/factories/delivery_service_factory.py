@@ -14,7 +14,7 @@ class DeliveryServiceFactory:
 
     @staticmethod
     def get_provider_by_name(name: str) -> DeliveryServiceProvider:
-        if name  == MockDeliveryServiceProvider.get_provider_name():
+        if name == MockDeliveryServiceProvider.get_provider_name():
             return MockDeliveryServiceProvider()
         else:
             raise ValueError(f"Unknown provider: {Settings.DELIVERY_SERVICE_PROVIDER}")

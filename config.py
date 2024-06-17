@@ -8,6 +8,7 @@ load_dotenv()
 class Settings:
     DATABASE_URL: str = os.getenv("DATABASE_URL")
     DELIVERY_SERVICE_PROVIDER: str = os.getenv("DELIVERY_SERVICE_PROVIDER")
+    PAYMENT_SERVICE_PROVIDER: str = os.getenv("PAYMENT_SERVICE_PROVIDER")
     COMPANY_NAME: str = os.getenv("COMPANY_NAME")
 
 
