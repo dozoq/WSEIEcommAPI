@@ -32,7 +32,7 @@ def update_shipment_status(order: OrderPointer, db: Session = Depends(get_db)):
     if db_item is None:
         raise HTTPException(409, detail={"error": "ORDER_NOT_FOUND"})
     delivery_provider = DeliveryServiceFactory.get_provider()
-    status = delivery_provider.unpack_shipment_status(db_item, "")
+    status = delivery_provider.unpack_shipment_status(db_item)
     if status is not None and status != db_item.status:
         db_item.status = status
         db.commit()
