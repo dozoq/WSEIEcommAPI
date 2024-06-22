@@ -7,12 +7,17 @@ class UserBase(BaseModel):
         from_attributes = True
 
 
+class UserPointer(UserBase):
+    id: int
+
+
 class User(UserBase):
     id: int
     first_name: str
     last_name: str
     username: str
     password: str
+    email: str
 
 
 class UserCreate(UserBase):
@@ -20,6 +25,7 @@ class UserCreate(UserBase):
     last_name: str
     username: str
     password: str
+    email: str
 
 
 class UserUpdate(UserBase):
@@ -28,6 +34,7 @@ class UserUpdate(UserBase):
     last_name: str | None = None
     username: str | None = None
     password: str | None = None
+    email: str | None = None
 
 
 class UserDelete(UserBase):
@@ -39,4 +46,5 @@ class UserResponse(UserBase):
     first_name: str
     last_name: str
     username: str
+    email: str
 

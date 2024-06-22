@@ -26,6 +26,7 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     first_name = Column(String)
     last_name = Column(String, index=True)
+    email = Column(String, index=True)
     username = Column(String, index=True)
     password = Column(String)
     orders = relationship("Order", back_populates="user")

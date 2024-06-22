@@ -37,6 +37,7 @@ def update_user(user: UserUpdate, db: Session = Depends(get_db)):
     db_item.last_name = user.last_name if user.last_name is not None else db_item.last_name
     db_item.username = user.username if user.username is not None else db_item.username
     db_item.password = user.password if user.password is not None else db_item.password
+    db_item.email = user.email if user.email is not None else db_item.email
     db.commit()
     db.refresh(db_item)
     return db_item
